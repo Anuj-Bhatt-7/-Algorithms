@@ -1,0 +1,55 @@
+
+<html>
+    <head>
+    <title>Binary Search </title>
+    </head>
+    <body>
+    <h2>Binary Search using javascript</h2>
+    <form id="form">
+    
+    <p id="data"><b>Array:[5,8,9,14,16] </b>&nbsp;<input type="tel" placeholder="Enter a number to search" id="key" ></p>
+    <input type="button" onclick="search()" value="Binary Search">
+    </form>
+    <script>
+        function search(){
+        
+            let key =Number(document.forms["form"]["key"].value);  
+            window.sortedArray = new Array()
+            sortedArray = [5,8,9,14,16];
+            binarySearch(sortedArray,key);
+        }
+        
+    function binarySearch(sortedArray,key){
+     
+    
+        let start = 0;
+        let end = 4;
+    
+        while (start <= end) {
+            let middle = Math.floor((start + end) / 2);
+            if (sortedArray[middle] === key) {
+                text="Element present at ";
+                loc = middle+1;
+                text= text.concat(text,loc);
+                document.write(text," place");
+                return;
+    
+            } else if (sortedArray[middle] <= key) {
+
+                start = middle + 1;
+            } else {
+             
+                end = middle - 1;
+            }
+        }
+        
+        document.write("Element not present");
+    
+    }
+    
+    </script>
+    
+    
+    </script></body>
+    <html>
+    
