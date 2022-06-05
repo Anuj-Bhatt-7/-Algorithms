@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Tree Traversal in Java </p>
+</body>
+<script>
+   class Node{
+    constructor(value) {
+        this.val = value;
+        this.leftChild = null;
+        this.rightChild = null;
+    }
+
+}
+
+class MakeTree {
+    constructor(rootValue) {
+        this.root = new Node(rootValue);
+    }
+
+     insert(presentNode, updatedValue) {
+        if (presentNode === null) {
+            presentNode = new Node(updatedValue);
+        } else if (updatedValue < presentNode.val) {
+            presentNode.leftChild = this.insert(presentNode.leftChild, updatedValue);
+        } else {
+            presentNode.rightChild = this.insert(presentNode.rightChild, updatedValue);
+        }
+        return presentNode;
+    }
+    insertBST(updatedValue) {
+        if(this.root==null){
+            this.root=new Node(updatedValue);
+            return;
+        }
+        this.insert(this.root, updatedValue);
+    }
+
+    preOrderPrint(presentNode) {
+        if (presentNode!==null) {
+            console.log(presentNode.val);
+            this.preOrderPrint(presentNode.leftChild);
+            this.preOrderPrint(presentNode.rightChild);
+        }
+
+    }
+  
+    postOrderPrint(presentNode) {
+        if (presentNode!==null) {
+            
+            this. postOrderPrint(presentNode.leftChild);
+            this. postOrderPrint(presentNode.rightChild);
+            console.log(presentNode.val);
+        }
+
+    }
+  
+    inOrderPrint(presentNode) {
+        if (presentNode!==null) {
+            this.inOrderPrint(presentNode.leftChild);
+            console.log(presentNode.val);
+            this.inOrderPrint(presentNode.rightChild);
+        }
+
+    }
+
+}
+
+var BST = new MakeTree();
+
+
+BST.insertBST(40);
+BST.insertBST(30);
+BST.insertBST(50);
+BST.insertBST(25);
+BST.insertBST(35);
+BST.insertBST(15);
+BST.insertBST(28);
+BST.insertBST(45);
+
+console.log("Inorder Traversal");
+BST.inOrderPrint(BST.root);
+
+console.log("Preorder Traversal");
+BST.preOrderPrint(BST.root);
+
+console.log("Postorder Traversal");
+BST.postOrderPrint(BST.root);
+</script>
+</html>

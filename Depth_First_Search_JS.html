@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depth First Search</title>
+</head>
+<body>
+    <h2>Depth First Search</h2>
+</body>
+<script>
+class Queue {
+    constructor() {
+        this.nodes = [];
+    }
+    
+    enqueue(element) {
+        return this.nodes.push(element);
+    }
+    dequeue() {
+        if(this.nodes.length > 0) {
+            return this.nodes.shift();
+        }
+    }
+    isEmpty(){
+       return this.nodes.length == 0;
+    }
+}
+
+    class Graph {
+    constructor(totalVertices){
+        this.totalVertices = totalVertices;
+        this.AdjList = new Map();
+    }
+ 
+    addVertex(v){
+    this.AdjList.set(v, []);
+    }
+
+    addEdge(v, w){
+	this.AdjList.get(v).push(w);
+	this.AdjList.get(w).push(v);
+    }
+
+    printGraph(){
+	    let keys = this.AdjList.keys();
+	    for (let i of keys){
+		    let values = this.AdjList.get(i);
+		    let conc = "";
+		    for (let j of values)
+			    conc += j + " ";
+		    console.log(i + " -> " + conc);
+	    }
+    }
+
+    depthFirstSearch(startingNode){
+	    var isVisited = {};
+	    this.DFSUtil(startingNode, isVisited);
+    }
+    DFSUtil(vert, isVisited){
+	    isVisited[vert] = true;
+	    console.log(vert);
+
+	    var adjacent = this.AdjList.get(vert);
+
+	    for (var i in adjacent) {
+		    var get_elem = adjacent[i];
+		    if (!isVisited[get_elem])
+		    	this.DFSUtil(get_elem, isVisited);
+	    }
+    }
+}
+let graph = new Graph(6);
+let ver = [ 'A', 'B', 'C', 'D', 'E', 'F' ];
+
+for (let i = 0; i < ver.length; i++) {
+	graph.addVertex(ver[i]);
+}
+
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'D');
+graph.addEdge('A', 'E');
+graph.addEdge('B', 'C');
+graph.addEdge('D', 'E');
+graph.addEdge('E', 'F');
+graph.addEdge('E', 'C');
+graph.addEdge('C', 'F');
+
+console.log("Depth First Search");
+graph.depthFirstSearch('A');
+
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breadth First Search</title>
+</head>
+<body>
+    <h3>Breadth First Search JS</h3>
+</body>
+<script>
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+    
+    enqueue(element) {
+        return this.items.push(element);
+    }
+    dequeue() {
+        if(this.items.length > 0) {
+            return this.items.shift();
+        }
+    }
+    isEmpty(){
+       return this.items.length == 0;
+    }
+}
+
+    class createGraph{
+    constructor(totalVertices)
+    {
+        this.totalVertices = totalVertices;
+        this.AdjList = new Map();
+    }
+ 
+    addNewVertex(v){
+    this.AdjList.set(v, []);
+    }
+
+    addNewEdge(v, w){
+	this.AdjList.get(v).push(w);
+	this.AdjList.get(w).push(v);
+    }
+
+    printGraph(){
+	    let keys = this.AdjList.keys();
+	    for (let i of keys){
+		    let values = this.AdjList.get(i);
+		    let conc = "";
+		    for (let j of values)
+			    conc += j + " ";
+		    console.log(i + " -> " + conc);
+	    }
+    }
+
+ 
+    // breadthFirstSearch(v)
+    breadthFirstSearch(startingNode){
+	    let isVisited = {};
+    	let queue = new Queue();
+
+	    isVisited[startingNode] = true;
+        queue.enqueue(startingNode);
+
+	    while (!queue.isEmpty()) {
+		    let getQueueElement = queue.dequeue();
+            console.log(getQueueElement);
+            let get_List = this.AdjList.get(getQueueElement);
+		    for (let i in get_List) {
+			    let neigh = get_List[i];
+                if (!isVisited[neigh]) {
+				    isVisited[neigh] = true;
+                    queue.enqueue(neigh);
+			    }
+		    }
+	    }
+    }
+}
+
+let graph = new createGraph(6);
+let ver = [ 'P', 'Q', 'R', 'S', 'T', 'U' ];
+
+// adding ver
+for (let i = 0; i < ver.length; i++) {
+	graph.addNewVertex(ver[i]);
+}
+
+
+graph.addNewEdge('P', 'Q');
+graph.addNewEdge('P', 'S');
+graph.addNewEdge('P', 'T');
+graph.addNewEdge('Q', 'R');
+graph.addNewEdge('S', 'T');
+graph.addNewEdge('T', 'U');
+graph.addNewEdge('T', 'R');
+graph.addNewEdge('R', 'U');
+
+
+console.log("Breadth First Search Traversal");
+graph.breadthFirstSearch('P');
+
+</script>
+</html>
