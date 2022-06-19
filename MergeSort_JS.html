@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MergeSort</title>
+</head>
+<body>
+    <h2>MergeSort</h2>
+</body>
+<script>
+    function merge(arr, low, mid, high){
+	    var n1 = mid - low + 1;
+	    var n2 = high -mid;
+
+	    var left_child = new Array(n1);
+	    var right_child = new Array(n2);
+
+	    for (var i = 0; i < n1; i++)
+		left_child[i] = arr[low + i];
+	    for (var j = 0; j < n2; j++)
+		right_child[j] = arr[mid + 1 + j];
+
+	    var i = 0;
+	    var j = 0;
+	    var k = low;
+
+	    while (i < n1 && j < n2) {
+		    if (left_child[i] <= right_child[j]) {
+			    arr[k] = left_child[i];
+			    i++;
+		    }
+		    else{
+			    arr[k] = right_child[j];
+			    j++;
+		    }
+		    k++;
+	    }
+
+	    while (i < n1) {
+		    arr[k] = left_child[i];
+		    i++;
+		    k++;
+	    }
+
+	    while (j < n2) {
+		    arr[k] =right_child[j];
+		    j++;
+		    k++;
+	    }
+    }
+
+    function mergeSort(arr,low,high){
+	    if(low>=high){
+		    return;
+	    }
+	    var mid =low+ parseInt((high-low)/2);
+	    mergeSort(arr,low,mid);
+	    mergeSort(arr,mid+1,high);
+	    merge(arr,low,mid,high);
+    }
+
+    function display( array, size){
+	    for (var i = 0; i < size; i++)
+	    document.write( array[i] + " ");
+	
+    }
+
+
+    var array = [ 12, 1, 17, 5, 8, 7 ];
+    var size = array.length;
+	document.writeln( "The unsort array:");
+	display(array, size);
+	
+    mergeSort(array, 0, size-1);
+
+    document.writeln( "Sort array:");
+	display(array, size);
+
+</script>
+</html>

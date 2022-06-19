@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickSort</title>
+</head>
+<body>
+    <h2>QuickSort</h2>
+</body>
+    <script>
+        function swap(arr,a, b){
+	        let temp;
+	        temp = arr[a];
+	        arr[a] = arr[b];
+	        arr[b] = temp;
+        }
+
+        function partition(arr, low, high){
+            i = (low - 1)
+            pivot = arr[high]
+
+            for(let j=low;j<high;j++){
+                if(arr[j] <= pivot){
+                    i = i + 1
+                    swap(arr,i,j);
+                }
+            }
+            swap(arr,i+1,high);
+            return (i + 1);
+        }
+
+        function QuickSort(array, low, high){
+            if(low < high){
+                pi = partition(array, low, high)
+                QuickSort(array, low, pi - 1)
+                QuickSort(array, pi + 1, high)
+            }
+        }
+
+        function display(array,array_length){
+           
+	        for (let i=0;i<array_length;i++){
+               document.write(array[i]+" ");
+	        }
+        }
+
+        let array = [ 12, 1, 17, 5, 8, 7 ];
+        let array_length = array.length;
+        document.writeln("Usorted Array : ");
+        display(array,array_length);
+
+        QuickSort(array, 0, array_length-1);
+        document.writeln("Sorted Array : ");
+        display(array,array_length);
+    </script>
+</html>
