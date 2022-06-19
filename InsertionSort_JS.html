@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion Sort</title>
+</head>
+<body>
+    <h2>Insertion Sort</h2>
+</body>
+<script>
+    function Insertion(array,array_length){
+        for(let j=0;j<array_length;j++){
+            for(let i=0;i<array_length-1;i++){
+                if(array[i]>array[i+1]){
+                    let temp = array[i];
+                    array[i] = array[i+1];
+                    array[i+1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+    let array = [14,17,82,12,6,21,7];
+    let array_length = array.length;
+    let sorted_array = Insertion(array,array_length)
+    document.writeln("The Insertion sort is ");
+    document.write( sorted_array);
+</script>
+</html>
