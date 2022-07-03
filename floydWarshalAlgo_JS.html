@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floyd Warshall Algo</title>
+</head>
+<body>
+    <h3>Floyd Warshall Algo</h3>
+    <script>
+        var INF = 99999;
+        class FloydWarshall {
+          constructor() {
+            this.V = 4;
+          }
+   
+          floydWarshallAlgo(graph) {
+            var dist = Array.from(Array(this.V), () => new Array(this.V).fill(0));
+            var i, j, k;
+            for (i = 0; i < this.V; i++) {
+              for (j = 0; j < this.V; j++) {
+                dist[i][j] = graph[i][j];
+              }
+            }
+            for (k = 0; k < this.V; k++) {
+              for (i = 0; i < this.V; i++) {
+                for (j = 0; j < this.V; j++) {
+                  if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                  }
+                }
+              }
+            }
+   
+            this.display(dist);
+          }
+   
+          display(dist) {
+            document.write(
+              "Printing Solution\n");
+            for (var i = 0; i < this.V; ++i) {
+              for (var j = 0; j < this.V; ++j) {
+                if (dist[i][j] == INF) {
+                  document.write(" INF ");
+                } else {
+                  document.write("  " + dist[i][j] + " ");
+                }
+              }
+   
+              document.write("<br>");
+            }
+          }
+        }
+       
+        var graph = [
+          [0, 5, INF, 10],
+          [INF, 0, 3, INF],
+          [INF, INF, 0, 1],
+          [INF, INF, INF, 0],
+        ];
+   
+        var algo = new FloydWarshall();
+   
+        algo.floydWarshallAlgo(graph);
+      </script> 
+</body>
+</html>
