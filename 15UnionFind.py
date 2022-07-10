@@ -42,7 +42,3 @@ if g.Cyclic():
 else:
     print("Graph does not contain cycle ")
 
-
-
-
-# This code is written by Ayush solanki  :-)  :-)
